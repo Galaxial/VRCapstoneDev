@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html
+lang="en" data-is-home="false" data-is-mobile="true" data-supports-vr="false" data-supports-touch="true" data-site-base-url="https://aframe.io"
+ data-site-root-path="/" data-site-home-url="https://aframe.io/" data-lib-home-url="https://aframe.io/" data-lib-examples-url="https://aframe.io/aframe/examples" 
+ data-title="{title} | A-Frame" data-is-spa="false" data-ga-id="UA-24056643-4" data-aframe-version="1.0.0" data-docs-version="1.0.0" data-is-android="true" 
+ data-is-ios="false" data-supports-vr-legacy="true" data-supports-webvrplus="true">
+  <head>
+    <meta charset="utf-8">
+    <title>Hello, World! - A-Frame</title>
+    <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <script src="js/lib/jquery-2.1.4.js"></script>
+        <script src="js/lib/jquery.mobile-1.4.5.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/lib/jquery.mobile-1.4.5.css">
+        <script src="js/lib/jquery.validate.js"></script>
+        <script src="js/database.js"></script>
+        <script src="js/brickDAL.js"></script>
+        <script src="js/facade.js"></script>
+        <script src="js/global.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/nzmystyle.css">
+        <link rel="stylesheet" type="text/css" href="css/styleCompendium.css">
+
+
+
+
+    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  </head>
+  <body>
+
+    <!--Home Page-->
+    <div data-role="page" id="nzHomePage" data-theme="b">
+      <!--Header-->
+      <header data-position="fixed" data-role="header" data-theme="b">
+          <title>[Application Title]</title>
+          <h1>[Application Title]</h1 data-theme="c">
+      </header>
+      
+      <section id="nzContent">
+          
+          
+          
+          <button id="mainScreenTools" data-role="button" class="ui-btn ui-icon-gear ui-btn-icon-left" type="submit" >Tools</button>
+          
+      
+
+
+
+      
+      </section>
+      <footer data-role="footer" data-position="fixed" data-theme="b">
+              <h4>&copy; [footer info - V0.0]</h4>
+          </footer>
+  </div>
+    
+    <a-scene vr-mode-ui="enterVRButton: #myEnterVrButton;" device-orientation-permission-ui="enabled: true">
+      <a-assets>
+        <img id="sky" src="/img/oblong.jpg">
+      </a-assets>
+      <a id="myEnterVRButton" href="#"></a>
+      <a-entity camera="active: true" look-controls="active: true" wasd-controls position="0 1.6 0" data-aframe-default-camera>
+      </a-entity>
+      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
+      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
+      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
+      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
+      <a-sky src="#sky"></a-sky>
+  
+    </a-scene>
+    
+    <!--<iframe id="exampleIframe" class="example__iframe" width="100%" height="100%" allowfullscreen="yes" 
+      scrolling="no" allowvr="yes" src="https://aframe.io/aframe/examples/boilerplate/panorama/"></iframe>-->
+
+  
+  </body>
+  
+  </html>
