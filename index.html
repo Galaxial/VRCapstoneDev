@@ -1,75 +1,215 @@
 <!DOCTYPE html>
-<html
-lang="en" data-is-home="false" data-is-mobile="true" data-supports-vr="false" data-supports-touch="true" data-site-base-url="https://aframe.io"
- data-site-root-path="/" data-site-home-url="https://aframe.io/" data-lib-home-url="https://aframe.io/" data-lib-examples-url="https://aframe.io/aframe/examples" 
- data-title="{title} | A-Frame" data-is-spa="false" data-ga-id="UA-24056643-4" data-aframe-version="1.0.0" data-docs-version="1.0.0" data-is-android="true" 
- data-is-ios="false" data-supports-vr-legacy="true" data-supports-webvrplus="true">
-  <head>
-    <meta charset="utf-8">
-    <title>Hello, World! - A-Frame</title>
-    <meta name="viewport" charset="utf-8" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <script src="js/lib/jquery-2.1.4.js"></script>
-        <script src="js/lib/jquery.mobile-1.4.5.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/lib/jquery.mobile-1.4.5.css">
-        <script src="js/lib/jquery.validate.js"></script>
-        <script src="js/database.js"></script>
-        <script src="js/brickDAL.js"></script>
-        <script src="js/facade.js"></script>
-        <script src="js/global.js"></script>
-        <link rel="stylesheet" type="text/css" href="css/nzmystyle.css">
-        <link rel="stylesheet" type="text/css" href="css/styleCompendium.css">
+<html lang="en" data-is-home="false" data-is-mobile="true" data-supports-vr="false" data-supports-touch="true"
+  data-site-base-url="https://aframe.io" data-site-root-path="/" data-site-home-url="https://aframe.io/"
+  data-lib-home-url="https://aframe.io/" data-lib-examples-url="https://aframe.io/aframe/examples"
+  data-title="{title} | A-Frame" data-is-spa="false" data-ga-id="UA-24056643-4" data-aframe-version="1.0.0"
+  data-docs-version="1.0.0" data-is-android="true" data-is-ios="false" data-supports-vr-legacy="true"
+  data-supports-webvrplus="true">
+
+<head>
+  <meta charset="utf-8">
+  <title>Hello, World! - A-Frame</title>
+  <meta name="viewport" charset="utf-8"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="js/lib/jquery-2.1.4.js"></script>
+  <script src="js/lib/jquery.mobile-1.4.5.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/lib/jquery.mobile-1.4.5.css">
+  <script src="js/lib/jquery.validate.js"></script>
+  <script src="js/database.js"></script>
+  <script src="js/brickDAL.js"></script>
+  <script src="js/facade.js"></script>
+  <script src="js/global.js"></script>
+  <link rel="stylesheet" type="text/css" href="css/nzmystyle.css">
+  <link rel="stylesheet" type="text/css" href="css/styleCompendium.css">
+  <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+  <script src="js/aframeComponentAssetManager.js"></script>
+
+</head>
+
+<body>
+
+  <!--Home Page-->
+  <div data-role="page" id="homePage" data-theme="b">
+    <!--Header-->
+    <header data-position="fixed" data-role="header" data-theme="b">
+      <title>[Application Title]</title>
+      <h1>[Application Title]</h1 data-theme="c">
+    </header>
+
+    <section id="content">
+
+
+      <button id="mainScreenEnvironments" data-role="button" class="ui-btn ui-icon-plus ui-btn-icon-left"
+        type="submit">Environments</button>
+      <button id="mainScreenTools" data-role="button" class="ui-btn ui-icon-gear ui-btn-icon-left"
+        type="submit">Tools</button>
+      <button id="mainScreenAbout" data-role="button" class="ui-btn ui-icon-bullets ui-btn-icon-left"
+        type="submit">About</button>
 
 
 
 
-    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
-  </head>
-  <body>
 
-    <!--Home Page-->
-    <div data-role="page" id="nzHomePage" data-theme="b">
-      <!--Header-->
-      <header data-position="fixed" data-role="header" data-theme="b">
-          <title>[Application Title]</title>
-          <h1>[Application Title]</h1 data-theme="c">
-      </header>
-      
-      <section id="nzContent">
-          
-          
-          
-          <button id="mainScreenTools" data-role="button" class="ui-btn ui-icon-gear ui-btn-icon-left" type="submit" >Tools</button>
-          
-      
-
-
-
-      
-      </section>
-      <footer data-role="footer" data-position="fixed" data-theme="b">
-              <h4>&copy; [footer info - V0.0]</h4>
-          </footer>
+    </section>
+    <footer data-role="footer" data-position="fixed" data-theme="b">
+      <h4>&copy; [footer info - V0.0]</h4>
+    </footer>
   </div>
-    
-    <a-scene vr-mode-ui="enterVRButton: #myEnterVrButton;" device-orientation-permission-ui="enabled: true">
-      <a-assets>
-        <img id="sky" src="/img/oblong.jpg">
-      </a-assets>
-      <a id="myEnterVRButton" href="#"></a>
-      <a-entity camera="active: true" look-controls="active: true" wasd-controls position="0 1.6 0" data-aframe-default-camera>
-      </a-entity>
-      <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-      <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-      <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-      <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-      <a-sky src="#sky"></a-sky>
-  
-    </a-scene>
-    
-    <!--<iframe id="exampleIframe" class="example__iframe" width="100%" height="100%" allowfullscreen="yes" 
-      scrolling="no" allowvr="yes" src="https://aframe.io/aframe/examples/boilerplate/panorama/"></iframe>-->
 
-  
-  </body>
-  
-  </html>
+  <!-- Environments List Page-->
+  <div data-role="page" id="environmentsListPage" data-theme="b">
+    <header data-position="fixed" data-role="header" data-theme="b">
+      <a href="#homePage" data-icon="carat-l" class="ui-btn-left"> Back </a>
+      <title>Environments List</title>
+      <a href="#addEnvironmentPage" data-icon="ui-icon-plus" class="ui-btn-right"> New </a>
+      <h1>Environments:</h1>
+      <!--Navbar items-->
+    </header>
+    <section id="content" data-theme="b">
+      <br />
+      <ul id="environmentLinks" data-role="listview" class="ui-listview" data-inset="true">
+      </ul>
+    </section>
+
+  </div>
+
+  <!--About Page-->
+  <div data-role="page" id="AboutPage" data-theme="b">
+    <!--Header-->
+    <header data-position="fixed" data-role="header" data-theme="b">
+      <a href="#homePage" data-icon="carat-l" class="ui-btn-left"> Back </a>
+      <title>About</title>
+      <h1>About</h1 data-theme="c">
+
+    </header>
+
+    <section id="Content" data-theme="b">
+      <h4>BrickList</h4><br />
+      <br />
+      <h4>Developed by:
+      </h4><br />
+      <p>Noah Zenker<br /><br />
+        Conestoga ID: 6959076<br />
+        Date: Who Knows?<br /><br />
+        Description: <br />
+        A proof-of-concept lego set inventory manager, allowing custom parts lists to be created and edited dynamically.
+        Future iterations will move to accessing the BrickLink API for proper parts import data. <br /><br />
+        Created for:<br />
+        PROG3185 - SECTION 5<br />
+        Programming: Mobile Applications
+      </p>
+      <footer data-role="footer" data-position="fixed" data-theme="b">
+        <h4>&copy; brickdev.iti - ver 0.3</h4>
+      </footer>
+
+  </div>
+
+  <!--Display Page-->
+
+
+  <div data-role="page" id="displayPage" data-theme="b">
+    <!--Header-->
+    <header data-position="fixed" data-role="header" data-theme="b">
+      <a href="#homePage" data-icon="carat-l" class="ui-btn-left"> Back </a>
+      <title>Display</title>
+      <h1>Web VR</h1 data-theme="c">
+
+    </header>
+
+    <section id="Content" data-theme="b">
+
+      <a-scene sceneassethandler vr-mode-ui="enterVRButton: #enterVR;" device-orientation-permission-ui="enabled: true">
+        <a-assets id="SceneAssets">
+          <audio id="forestAmbience" src="/media/forest.mp3" preload="auto"></audio>
+          <audio id="alleywayAmbience" src="/media/alleyway.mp3" preload="auto"></audio>
+          <audio id="studioAmbience" src="/media/studio.mp3" preload="auto"></audio>
+          <audio id="factoryAmbience" src="/media/factory.mp3" preload="auto"></audio>
+          <img id="parkBackgroundTexture" src="/img/park.jpg">
+          <img id="alleywayBackgroundTexture" src="/img/alleyway.jpg">
+          <img id="studioBackgroundTexture" src="/img/studio.jpg">
+          <img id="boilerBackgroundTexture" src="/img/boiler.jpg">
+          <img id="defaultSky" src="/img/default.jpg">
+        </a-assets>
+
+        <a-entity camera="active: true" look-controls="active: true" wasd-controls position="0 1.6 0"
+          data-aframe-default-camera>
+        </a-entity>
+        <a-sound soundengine id="soundengine" src="#forestAmbience" loop="true"></a-sound>
+        <a-sky id="background" src="#defaultSky"></a-sky>
+      </a-scene>
+
+    </section>
+    <button id="enterVR" data-role="button" class="ui-btn ui-icon-plus ui-btn-icon-left" type="submit">Launch VR (Mobile
+      Only)</button>
+
+
+  </div>
+
+
+  <!--New Environment-->
+  <div data-role="page" id="addEnvironmentPage" data-theme="b">
+    <header data-position="fixed" data-role="header" data-theme="b">
+      <a href="#homePage" data-icon="carat-l" class="ui-btn-left">Home </a>
+      <title>New Environment</title>
+      <h1>New Environment</h1 data-theme="b">
+      <!--Navbar items-->
+    </header>
+
+    <section id="content">
+      <form id="addEnvironmentForm">
+
+        <br />
+        <label>Environment Name:</label>
+        <input type="text" id="addEnvironmentName" name="addEnvironmentName" required placeholder="My Environment">
+
+        <label>Image:</label>
+        <select id="comboboxImage" name="comboboxImage">
+          <ul id="dropListImage" data-role="listview" class="ui-listview-inset">
+
+          </ul>
+        </select>
+
+        <label>Ambient Audio:</label>
+        <select id="comboboxAudio" name="comboboxAudio">
+          <ul id="dropListAudio" data-role="listview" class="ui-listview-inset">
+
+          </ul>
+        </select>
+
+        <label>Description</label>
+        <textarea rows="2" size="auto" id="addEnvironmentDescription" name="addEnvironmentDescription"></textarea>
+
+        <br />
+      </form>
+      <button data-type="input" name="addEnvironmentNext" class="ui-btn ui-btn-active ui-btn-inline ui-corner-all"
+        id="addEnvironmentNext">Next</button>
+      <br />
+      <br />
+
+    </section>
+
+    <footer data-role="footer" data-position="fixed" data-theme="b">
+      <h4>&copy; brickdev.iti - ver 0.3</h4>
+    </footer>
+  </div>
+
+  <!-- Environment Details -->
+  <div data-role="page" id="environmentDetailsPage" data-theme="b">
+    <header data-position="fixed" data-role="header" data-theme="b">
+      <a href="#environmentsListPage" data-icon="carat-l" class="ui-btn-left"> Back </a>
+      <title>Environment Details</title>
+      <h1>Environment Details</h1 data-theme="c">
+    </header>
+    <section id="detailsDisp">
+
+    </section>
+    <br /><br />
+    <button data-type="input" class="ui-btn ui-btn-b ui-corner-all" id="viewVR">View</button>
+    <br /><br />
+    <button data-type="input" class="ui-btn ui-btn-b ui-corner-all" id="deleteEnvironment">Delete Environment</button>
+  </div>
+
+
+</body>
+
+</html>

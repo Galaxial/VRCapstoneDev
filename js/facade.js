@@ -13,52 +13,93 @@ function clearDatabase() {
     }
 }
 
-
-//Save new record (insert)
-function nzAddCreation() {
+function updateImagesDropdown() {
     
     var options = [];
-    
-    var blue = 0;
-    var yellow = 0;
-    var red = 0;
-    var black = 0;
-    var grey = 0;
-    var white = 0;
+    function callback(tx, results) {
+        var options = [];
+        var htmlCode = "";
+        for (var i = 0; i < results.rows.length; i++) {
 
-    options = [blue, yellow, red, black, grey, white];
+            var row = results.rows[i];
+            if (row['id'] == "4"){
+                htmlCode += "<li><option value='" + row['id'] + 
+            "'>" + row['name'] + "</option></li>";
+            } else {
 
-    function callbackParts() {
-        console.info("Success: parts list inserted successfully");
+            htmlCode += "<li><option value='" + row['id'] + 
+            "'>" + row['name'] + "</option></li>";
+            }
+        }
+        var dropListType = $("#comboboxImage");
+        dropListType = dropListType.html(htmlCode);
+        dropListType.listview("refresh"); 
     }
+
+    Imagepath.selectAll(options, callback);
+}
+
+function updateAudioDropdown() {
     
-    Parts.nzinsert(options, callbackParts);
+    var options = [];
+    function callback(tx, results) {
+        var options = [];
+        var htmlCode = "";
+        for (var i = 0; i < results.rows.length; i++) {
+
+            var row = results.rows[i];
+            if (row['id'] == "4"){
+                htmlCode += "<li><option value='" + row['id'] + 
+            "'>" + row['name'] + "</option></li>";
+            } else {
+
+            htmlCode += "<li><option value='" + row['id'] + 
+            "'>" + row['name'] + "</option></li>";
+            }
+        }
+        var dropListType = $("#comboboxAudio");
+        dropListType = dropListType.html(htmlCode);
+        dropListType.listview("refresh"); 
+    }
+
+    Audiopath.selectAll(options, callback);
+}
+
+
+
+
+
+//Save new record (insert)
+function addEnvironment() {
+    
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, '0');
-    var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); 
     var yyyy = today.getFullYear();
 
     today = mm + '/' + dd + '/' + yyyy;
     var getDate = today;
-    var name = $("#nzAddCreationName").val();
+    var name = $("#addEnvironmentName").val();
     if (name ==""){
-        name = "My Creation";
+        name = "My Environment";
     }
     var updated = getDate;
-    var description = $("#nzAddCreationDescription").val();
+    var description = $("#addEnvironmentDescription").val();
+    var imagepathId = $("#comboboxImage").val();
+    var audiopathId = $("#comboboxAudio").val();
     
-    options = [name, updated, description];
+    options = [name, updated, description, imagepathId, audiopathId];
     
     function callback() {
         console.info("Success: creation records inserted successfully");
         
     }
     
-    Creation.nzinsert(options, callback);
+    Environment.insert(options, callback);
         
 }
-//List all Creations
-function nzGetCreations() {
+//List all Environments
+function getEnvironments() {
     
     var options = [];
 
@@ -69,71 +110,85 @@ function nzGetCreations() {
         for (var i = 0; i < results.rows.length; i++) {
 
             var row = results.rows[i];
-            htmlCode += "<li><a data-role='button' class='whynot' data-row-id='" + row['id'] + "' href='#'>" +
+            htmlCode += "<li><a data-role='button' class='generatedM2' data-row-id='" + row['id'] + "' href='#'" +
+                " data-row-imageid='" + row['imagepathId'] + "' data-row-audioid='" + row['audiopathId'] + "'>" +
                 "<h2>" + row['name'] + "</h2>" +
                 "<p>Description: " + row['description'] + "</p>" +
                 "<p>Last Edited: " + row['updated'] + "</p></a></li>";
                 
         }
-        var ls = $("#nzCreationLinks");
+        var ls = $("#environmentLinks");
         ls = ls.html(htmlCode);
         ls.listview("refresh"); 
-        $("#nzCreationList a.whynot").on("click", clickHandler);
+        $("#environmentsListPage a.generatedM2").on("click", clickHandler);
 
         function clickHandler() {
             localStorage.setItem("id", $(this).attr("data-row-id"));
-            $(location).prop('href', '#nzViewCreation');
+            localStorage.setItem("audioid", $(this).attr("data-row-audioid"));
+            localStorage.setItem("imageid", $(this).attr("data-row-imageid"));
+            $(location).prop('href', '#environmentDetailsPage');
             
         }
 
     }
 
-    Creation.nzselectAll(options, callback);
+    Environment.selectAll(options, callback);
     
 }
-//Show current Creation
-function nzShowCurrentCreation() {
+//Show current Environment
+function showCurrentEnvironment() {
 
     var id = localStorage.getItem("id");
     var options = [id];
-
+    
+    
     function callback(tx, results) {
         var row = results.rows[0];
         var htmlCode ="";
         htmlCode += 
                 "<h1>" + row['name'] + "</h1>" +
-                "<p>Last Edited: " + row['updated'] + "</p>" +
+                "<p>Last Edited: " + row['updated'] + "</p><br/>" +
                 "<h4>Description: </h4>" +
                 "<p data-inset='true'>" + row['description'] + "</p>";
                 
-        var ls = $("#nzDisp");
+        var ls = $("#detailsDisp");
         ls = ls.html(htmlCode);
     }
-    Creation.nzselect(options, callback);
+    Environment.select(options, callback);
     
 }
 
-function nzShowCurrentCreationMiniList() {
-    var id = localStorage.getItem("id");
+//Retrieve audio record from db
+function getAudio() {
+    var id = localStorage.getItem("audioid");
     var options = [id];
+    var returnName;
     function callback(tx, results) {
         var row = results.rows[0];
-        var htmlCode ="";               
-        htmlCode += "<li><p> Brick, 2x4 [Blue x" + row['blue'] + "]</p></li>" + 
-                    "<li><p> Brick, 2x4 [Yellow x" + row['yellow'] + "]</p></li>" + 
-                    "<li><p> Brick, 2x4 [Red x" + String(row['red']) + "]</p></li>" + 
-                    "<li><p> Brick, 2x2 [Black x" + row['black'] + "]</p></li>" + 
-                    "<li><p> Brick, 2x2 [Grey x" + row['grey'] + "]</p></li>" + 
-                    "<li><p> Brick, 2x2 [White x" + row['white'] + "]</p></li>";    
-        var ls = $("#nzBrickListMini");
-        ls = ls.html(htmlCode);
-        ls.listview("refresh"); 
+        var retrievedNamne = row['name'];
+        console.log("B: " + retrievedNamne);
+        setEnvironmentAudioParams(retrievedNamne);
 
     }
-
-    Parts.nzselect(options, callback);
-    
+    Audiopath.select(options, callback);
 }
+
+//Retrieve image record from db
+function getImage() {
+    var id = localStorage.getItem("imageid");
+    var options = [id];
+    var returnName;
+    function callback(tx, results) {
+        var row = results.rows[0];
+        var retrievedNamne = row['name'];
+        console.log("Retrieved: " + retrievedNamne);
+        setEnvironmentImageParams(retrievedNamne);
+
+    }
+    Imagepath.select(options, callback);
+}
+
+
 
 function nzUpdateParts(){
 
@@ -170,48 +225,6 @@ function nzUpdateParts(){
 }
 
 
-
-function nzdeleteCreation(){
-    var id = localStorage.getItem("id");
-    var options = [id];
-
-    function callbackParts() {
-        console.info("Success: Parts Record deleted successfully");
-    }
-
-    function callback() {
-        alert("Success: Record deleted successfully");
-        $(location).prop('href', '#nzCreationList');
-    }
-
-    Parts.nzdelete(options, callbackParts);
-    Creation.nzdelete(options, callback);
-}
-
-
-function brickList_loadQuantityFromId(){
-
-    var id = localStorage.getItem("id");
-    var options = [id];
-
-    function callback(tx, results) {
-        var row = results.rows[0];
-        
-        $("#quantityCount_blue").html(row['blue']);
-        $("#quantityCount_yellow").html(row['yellow']);
-        $("#quantityCount_red").html(row['red']);
-        $("#quantityCount_black").html(row['black']);
-        $("#quantityCount_grey").html(row['grey']);
-        $("#quantityCount_white").html(row['white']);
-
-        console.info("parts loaded");
-
-    }
-
-    Parts.nzselect(options, callback);
-    
-    
-}
 
 function nzGetNewestInsert() {
     

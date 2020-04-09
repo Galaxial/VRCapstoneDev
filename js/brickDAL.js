@@ -3,12 +3,13 @@
 
 //Creation CRUD
 
-var Creation = {
+var Environment = {
     //Insert
-    nzinsert: function (options, callback) {
+
+    insert: function (options, callback) {
         function txFunction(tx) {
-            var sql = "INSERT INTO creation(name, updated, description, partsId) " +
-            "VALUES(?,?,?, (SELECT id FROM parts order by id DESC LIMIT 1));";
+            var sql = "INSERT INTO environments(name, updated, description, audiopathId, imagepathId) " +
+            "VALUES(?,?,?,?,?);";
             tx.executeSql(sql, options, callback, errorHandler);
         }
 
@@ -18,9 +19,9 @@ var Creation = {
         db.transaction(txFunction, errorHandler, successTransaction);
     },
     //Select 
-    nzselect: function (options, callback) {
+    select: function (options, callback) {
         function txFunction(tx) {
-            var sql = "SELECT * FROM creation WHERE id=?;";
+            var sql = "SELECT * FROM environments WHERE id=?;";
             tx.executeSql(sql, options, callback, errorHandler);
         }
 
@@ -31,9 +32,9 @@ var Creation = {
     },
 
     //SelectAll
-    nzselectAll: function (options, callback) {
+    selectAll: function (options, callback) {
         function txFunction(tx) {
-            var sql = "SELECT * FROM creation;";
+            var sql = "SELECT * FROM environments;";
             tx.executeSql(sql, options, callback, errorHandler);
         }
 
@@ -86,26 +87,14 @@ var Creation = {
     
 };
 
-//Type CRUD
+//Imagepath functions
 
-var Parts = {
+var Imagepath = {
     
-    //Update
-    nzupdate: function (options, callback) {
-        function txFunction(tx) {
-            var sql = "UPDATE parts SET blue=?, yellow=?, red=?, black=?, grey=?, white=? WHERE id=?;";
-            tx.executeSql(sql, options, callback, errorHandler);
-        }
-
-        function successTransaction() {
-            console.info("Success: Update transaction successful");
-        }
-        db.transaction(txFunction, errorHandler, successTransaction);
-    },
     //SelectAll
-    nzselectAll: function (options, callback) {
+    selectAll: function (options, callback) {
         function txFunction(tx) {
-            var sql = "SELECT * FROM parts;";
+            var sql = "SELECT * FROM imagepaths;";
             tx.executeSql(sql, options, callback, errorHandler);
         }
 
@@ -114,59 +103,49 @@ var Parts = {
         }
         db.transaction(txFunction, errorHandler, successTransaction);
     },
-
-    //Insert
-    nzinsert: function (options, callback) {
+    select: function (options, callback) {
         function txFunction(tx) {
-            var sql = "INSERT INTO parts(blue, yellow, red, black, grey, white) " +
-            "VALUES(?,?,?,?,?,?);";
+            var sql = "SELECT * FROM imagepaths WHERE id =?;";
             tx.executeSql(sql, options, callback, errorHandler);
         }
-
-        function successTransaction() {
-            console.info("Success: Insert transaction successful");
-        }
-        db.transaction(txFunction, errorHandler, successTransaction);
-    },
-    //Select 
-    nzselect: function (options, callback) {
-        function txFunction(tx) {
-            var sql = "SELECT * FROM parts WHERE id=?;";
-            tx.executeSql(sql, options, callback, errorHandler);
-        }
-
         function successTransaction() {
             console.info("Success: Select transaction successful");
         }
         db.transaction(txFunction, errorHandler, successTransaction);
-    },
-
-    //Select Newest 
-    nzselectnewest: function (options, callback) {
-        function txFunction(tx) {
-            var sql = "SELECT id FROM parts order by id DESC LIMIT 1;";
-            tx.executeSql(sql, options, callback, errorHandler);
-        }
-
-        function successTransaction() {
-            console.info("Success: Select Newest transaction successful");
-        }
-        db.transaction(txFunction, errorHandler, successTransaction);
-    },
-    //Delete
-    nzdelete: function (options, callback) {
-        function txFunction(tx) {
-            var sql = "DELETE FROM parts WHERE id=?;";
-            tx.executeSql(sql, options, callback, errorHandler);
-        }
-
-        function successTransaction() {
-            console.info("Success: Delete transaction successful");
-        }
-        db.transaction(txFunction, errorHandler, successTransaction);
+        
     }
     
+};
+
+//Audiopath functions
+
+var Audiopath = {
+    
+    //SelectAll
+    selectAll: function (options, callback) {
+        function txFunction(tx) {
+            var sql = "SELECT * FROM audiopaths;";
+            tx.executeSql(sql, options, callback, errorHandler);
+        }
+
+        function successTransaction() {
+            console.info("Success: Select All transaction successful");
+        }
+        db.transaction(txFunction, errorHandler, successTransaction);
+    },
+    select: function (options, callback) {
+        function txFunction(tx) {
+            var sql = "SELECT * FROM audiopaths WHERE id =?;";
+            tx.executeSql(sql, options, callback, errorHandler);
+        }
+        function successTransaction() {
+            console.info("Success: Select transaction successful");
+        }
+        db.transaction(txFunction, errorHandler, successTransaction);
+        
+    }
     
 };
+
 
 

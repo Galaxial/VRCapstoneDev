@@ -12,7 +12,7 @@ var DB = {
 
         var shortName= "EnvironmentDB";
         var version = "0.1";
-        var displayName = "VR Stored Environments DB";
+        var displayName = "VR Stored Environment Schema DB";
         var dbSize = 2 * 1024 * 1024;
 
         console.info("Creating Environments Database...");
@@ -46,15 +46,6 @@ var DB = {
                 console.info("Success: Create table: imagepaths successful.");
             }
 
-            //Create descriptions table
-
-            console.info("Creating table: descriptions");
-
-            var sql = "CREATE TABLE IF NOT EXISTS descriptions(" +
-                "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                "description TEXT);";
-                
-            tx.executeSql(sql, options, successCreateDescriptions, errorHandler);
 
             //Create audiopaths table
 
@@ -62,9 +53,36 @@ var DB = {
 
             var sql = "CREATE TABLE IF NOT EXISTS audiopaths(" +
                 "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                "name TEXT," +
                 "path TEXT);";
                 
             tx.executeSql(sql, options, successCreateAudioPaths, errorHandler);
+
+            //Insert included audio data 1
+
+            var sql = "INSERT INTO audiopaths(name, path) SELECT'forest','/media/forest.mp3' WHERE NOT EXISTS (SELECT * FROM audiopaths WHERE id = 1);";
+            
+            tx.executeSql(sql, options, successCreateAudioPaths, errorHandler);
+
+            //Insert included audio data 2
+
+            var sql = "INSERT INTO audiopaths(name, path) SELECT'alleyway','/media/alleyway.mp3' WHERE NOT EXISTS (SELECT * FROM audiopaths WHERE id = 2);";
+            
+            tx.executeSql(sql, options, successCreateAudioPaths, errorHandler);
+
+            //Insert included audio data 3
+
+            var sql = "INSERT INTO audiopaths(name, path) SELECT'studio','/media/studio.mp3' WHERE NOT EXISTS (SELECT * FROM audiopaths WHERE id = 3);";
+            
+            tx.executeSql(sql, options, successCreateAudioPaths, errorHandler);
+
+            //Insert included audio data 4
+
+            var sql = "INSERT INTO audiopaths(name, path) SELECT'factory','/media/factory.mp3' WHERE NOT EXISTS (SELECT * FROM audiopaths WHERE id = 4);";
+            
+            tx.executeSql(sql, options, successCreateAudioPaths, errorHandler);
+
+
 
 
             //Create imagepaths table
@@ -73,27 +91,60 @@ var DB = {
             
             var sql = "CREATE TABLE IF NOT EXISTS imagepaths(" +
                 "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
+                "name TEXT," +
                 "path TEXT);";
                 
             tx.executeSql(sql, options, successCreateImagePaths, errorHandler);
             
+            
+            
+            //Insert included image data 1
 
+            var sql = "INSERT INTO imagepaths(name, path) SELECT'park','/img/park.jpg' WHERE NOT EXISTS (SELECT * FROM imagepaths WHERE id = 1);";
+            
+            tx.executeSql(sql, options, successCreateImagePaths, errorHandler);
+
+            //Insert included image data 2
+
+            var sql = "INSERT INTO imagepaths(name, path) SELECT'alleyway','/img/alleyway.jpg' WHERE NOT EXISTS (SELECT * FROM imagepaths WHERE id = 2);";
+            
+            tx.executeSql(sql, options, successCreateImagePaths, errorHandler);
+
+            //Insert included image data 3
+            
+            var sql = "INSERT INTO imagepaths(name, path) SELECT'studio','/img/studio.jpg' WHERE NOT EXISTS (SELECT * FROM imagepaths WHERE id = 3);";
+            
+            tx.executeSql(sql, options, successCreateImagePaths, errorHandler);
+
+            //Insert included image data 4 
+
+            var sql = "INSERT INTO imagepaths(name, path) SELECT 'boiler','/img/boiler.jpg' WHERE NOT EXISTS (SELECT * FROM imagepaths WHERE id = 4);";
+            
+            tx.executeSql(sql, options, successCreateImagePaths, errorHandler);
+
+            
+            
+            
+
+            //Create environments table
 
             console.info("Creating table: environments");
-
-            //Create creation table
             var sql = "CREATE TABLE IF NOT EXISTS environments(" +
                 "id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT," +
                 "name VARCHAR(30)," +
                 "updated DATE," +
-                "descriptionId INTEGER NOT NULL," +
+                "description TEXT," +
                 "audiopathId INTEGER ," +
                 "imagepathId INTEGER ," +
-                "FOREIGN KEY(descriptionId) REFERENCES descriptions(id)" +
                 "FOREIGN KEY(audiopathId) REFERENCES audiopaths(id)" +
                 "FOREIGN KEY(imagepathId) REFERENCES imagepaths(id));";
             
             tx.executeSql(sql, options, successCreateEnvironments, errorHandler);
+
+
+            var sql = "INSERT INTO environments(name, description, imagepathId, audiopathId) SELECT'TestWorld','example','3','2' WHERE NOT EXISTS (SELECT * FROM environments);";
+            
+            tx.executeSql(sql, options, successCreateImagePaths, errorHandler);
             
         }
         function successTransaction(){
@@ -111,12 +162,6 @@ var DB = {
             var sql = "DROP TABLE IF EXISTS environments;";
             function successDrop() {
                 console.info("Success: environments table dropped successfully");
-            }
-            tx.executeSql(sql, options, successDrop, errorHandler );
-
-            var sql = " DROP TABLE IF EXISTS descriptions;";
-            function successDrop() {
-                console.info("Success: descriptions table dropped successfully");
             }
             tx.executeSql(sql, options, successDrop, errorHandler );
 
