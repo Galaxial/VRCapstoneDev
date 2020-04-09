@@ -142,7 +142,7 @@ var DB = {
             tx.executeSql(sql, options, successCreateEnvironments, errorHandler);
 
 
-            var sql = "INSERT INTO environments(name, description, imagepathId, audiopathId) SELECT'TestWorld','example','3','2' WHERE NOT EXISTS (SELECT * FROM environments);";
+            var sql = "INSERT INTO environments(name, description, imagepathId, audiopathId) SELECT'Test World','example world','3','2' WHERE NOT EXISTS (SELECT * FROM environments);";
             
             tx.executeSql(sql, options, successCreateImagePaths, errorHandler);
             

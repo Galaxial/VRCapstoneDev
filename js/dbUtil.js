@@ -44,23 +44,11 @@ var Environment = {
         db.transaction(txFunction, errorHandler, successTransaction);
     },
     
-    //Update
-    nzupdate: function (options, callback) {
-        function txFunction(tx) {
-            var sql = "UPDATE creation SET name=?, updated=?, description=? WHERE id=?;";
-            tx.executeSql(sql, options, callback, errorHandler);
-        }
-
-        function successTransaction() {
-            console.info("Success: Update transaction successful");
-        }
-        db.transaction(txFunction, errorHandler, successTransaction);
-    },
 
     //Update Date (exclusive)
-    nzupdate_date: function (options, callback) {
+    update_date: function (options, callback) {
         function txFunction(tx) {
-            var sql = "UPDATE creation SET updated=? WHERE id=?;";
+            var sql = "UPDATE environments SET updated=? WHERE id=?;";
             tx.executeSql(sql, options, callback, errorHandler);
         }
 

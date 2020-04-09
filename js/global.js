@@ -23,7 +23,7 @@ function displayPage_PageShow(){
     initActiveAudio();
 }
 
-function mainScreenTools_click(){
+function viewVR_click(){
     getAudio();
     getImage();
     $(location).prop('href', '#displayPage');
@@ -70,11 +70,11 @@ function init() {
 
     //Button Clickhandler Bindings
     $("#addEnvironmentNext").on("click", buttonNext_click);
-    $("#viewVR").on("click", mainScreenTools_click);
+    $("#viewVR").on("click", viewVR_click);
     $("#enterVR").on("click", enterVR_click);
     $("#mainScreenEnvironments").on("click", mainScreenEnvironments_click);
     $("#mainScreenAbout").on("click", mainScreenAbout_click);
-    $("#mainScreenTools").on("click", mainScreenTools_click);
+    
     
     
 }
