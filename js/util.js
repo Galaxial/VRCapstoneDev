@@ -1,10 +1,14 @@
 
 
+
+//clearDatabase function
+//returns confirmation prompt message value
+//if data is returned, calls dropTables to drop db tables and clear database
 function clearDatabase() {
     var result = confirm("Do you really want to clear the database?");
     if (result) {
         try {
-            DB.nzdropTables();
+            DB.dropTables();
             alert("Database cleared!");
             location.reload();
         } catch (e) {
@@ -13,6 +17,9 @@ function clearDatabase() {
     }
 }
 
+
+//updateImagesDropdown function
+//make SQL query for image paths stored in table, and populate dropdown list with fetched options
 function updateImagesDropdown() {
     
     var options = [];
@@ -39,6 +46,8 @@ function updateImagesDropdown() {
     Imagepath.selectAll(options, callback);
 }
 
+//updateAudioDropdown function
+//make SQL query for audio file paths stored in table, and populate dropdown list with fetched options
 function updateAudioDropdown() {
     
     var options = [];
@@ -69,7 +78,9 @@ function updateAudioDropdown() {
 
 
 
-//Save new record (insert)
+//addEnvironment function
+//Gets current date, and params stored in add environment page form
+//uses collected values and inserts them into environments table as new record
 function addEnvironment() {
     
     var today = new Date();
@@ -88,7 +99,7 @@ function addEnvironment() {
     var imagepathId = $("#comboboxImage").val();
     var audiopathId = $("#comboboxAudio").val();
     
-    options = [name, updated, description, imagepathId, audiopathId];
+    options = [name, updated, description, audiopathId, imagepathId];
     
     function callback() {
         console.info("Success: creation records inserted successfully");
@@ -98,7 +109,12 @@ function addEnvironment() {
     Environment.insert(options, callback);
         
 }
-//List all Environments
+
+//getEnvironments function
+//Fetches all environment records from table
+//then populates environments list with html entires for each one
+//each entry contains the title, date created, and description
+//finally, attach clickhandlers to each one that forwards to the environment details page of the associated record and save data to localstorage vars
 function getEnvironments() {
     
     var options = [];
@@ -135,7 +151,10 @@ function getEnvironments() {
     Environment.selectAll(options, callback);
     
 }
-//Show current Environment
+
+//showCurrentEnvironment function
+//Get requested environment record from localstorage id var
+//fetch record and populate page with it's details
 function showCurrentEnvironment() {
 
     var id = localStorage.getItem("id");
@@ -158,7 +177,8 @@ function showCurrentEnvironment() {
     
 }
 
-//Retrieve audio record from db
+//getAudio
+//retrieve currently selected audiopath from localstorage id and call setEnvironmentAudioParams to assign it to scene
 function getAudio() {
     var id = localStorage.getItem("audioid");
     var options = [id];
@@ -173,7 +193,8 @@ function getAudio() {
     Audiopath.select(options, callback);
 }
 
-//Retrieve image record from db
+//getImage
+//retrieve currently selected image path from localstorage id and call setEnvironmentImageParams to assign it to scene
 function getImage() {
     var id = localStorage.getItem("imageid");
     var options = [id];

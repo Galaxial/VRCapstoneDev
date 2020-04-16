@@ -1,8 +1,9 @@
 
 
 
-//Creation CRUD
 
+//Environment db class
+//Assign crud functions to environment
 var Environment = {
     //Insert
 
@@ -58,9 +59,9 @@ var Environment = {
         db.transaction(txFunction, errorHandler, successTransaction);
     },
 
-    nzdelete: function (options, callback) {
+    delete: function (options, callback) {
         function txFunction(tx) {
-            var sql = "DELETE FROM creation WHERE id=?;";
+            var sql = "DELETE FROM environments WHERE id=?;";
             tx.executeSql(sql, options, callback, errorHandler);
         }
 
@@ -75,8 +76,8 @@ var Environment = {
     
 };
 
-//Imagepath functions
-
+//Imagepath db class
+//Assign crud functions to Imagepath
 var Imagepath = {
     
     //SelectAll
@@ -105,8 +106,8 @@ var Imagepath = {
     
 };
 
-//Audiopath functions
-
+//Audiopath db class
+//Assign crud functions to audiopath
 var Audiopath = {
     
     //SelectAll
