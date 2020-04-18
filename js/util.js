@@ -1,6 +1,10 @@
 
 
 
+
+
+
+
 //clearDatabase function
 //returns confirmation prompt message value
 //if data is returned, calls dropTables to drop db tables and clear database
