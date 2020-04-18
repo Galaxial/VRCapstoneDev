@@ -1,4 +1,10 @@
-
+/* global.js
+* Primary controller for application
+* Initializes application and manages page events and event handlers  
+* 
+* @Author Noah Zenker, 2020
+*  
+*/
 
 //Table Dropper 
 //Drops tables in database
@@ -51,7 +57,7 @@ function viewVR_click() {
     initActiveAudio();
     $(location).prop('href', '#displayPage');
     
-    initActiveAudio();
+    initActiveAudio();  //Chrome webplayer requires user interaction to begin audio, trigger again to circumvent this
 }
 
 //PageHide event handler for VR display page
@@ -135,7 +141,7 @@ function initDB() {
             console.error("Error: Cannot create tables: Database does not exist!");
         }
     } catch (e) {
-        console.error("Error: (Fatal) Error in initDB(). Can not proceed.");
+        console.error("Error: Error in initDB(). Cannot continue.");
     }
 }
 

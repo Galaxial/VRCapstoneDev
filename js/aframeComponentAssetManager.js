@@ -1,4 +1,9 @@
-
+/* aframeComponentAssetManager.js
+* Component registration and utility functions for managing the scene through AFRAME  
+* 
+* @Author Noah Zenker, 2020
+*  
+*/
 
 
 //Register sceneassethandler component to scene data

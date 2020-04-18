@@ -1,4 +1,9 @@
-
+/* database.js
+* Database Logic for application WEBSQL  
+* 
+* @Author Noah Zenker, 2020
+*  
+*/
 
 var db;
 

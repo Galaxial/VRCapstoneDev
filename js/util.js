@@ -1,9 +1,11 @@
 
-
-
-
-
-
+/* util.js
+* utility functions for application, uses CRUD event results to  
+* populate pages and retrieve data needed for AFRAME scene
+* 
+* @Author Noah Zenker, 2020
+*  
+*/
 
 //clearDatabase function
 //returns confirmation prompt message value

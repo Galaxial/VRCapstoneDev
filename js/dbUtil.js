@@ -1,6 +1,9 @@
-
-
-
+/* dbUtil.js
+*   Database Table CRUD and specialized CRUD functions
+* 
+* @Author Noah Zenker, 2020
+*  
+*/
 
 //Environment db class
 //Assign crud functions to environment
